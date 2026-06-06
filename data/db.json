@@ -1,0 +1,286 @@
+{
+  "users": [
+    {
+      "id": "usr_johndoe",
+      "name": "John Kamau",
+      "username": "johndoe",
+      "phone": "0712345678",
+      "email": "kamau@sokos.co.ke",
+      "verified": true,
+      "docVerified": true,
+      "verificationDocType": "national_id",
+      "rating": 4.8,
+      "reviewsCount": 15,
+      "locationName": "Kilimani, Nairobi",
+      "latitude": -1.2915,
+      "longitude": 36.79,
+      "createdAt": "2026-05-06T12:50:21.543Z",
+      "onboarded": true,
+      "password": "soko123"
+    },
+    {
+      "id": "usr_marywaweru",
+      "name": "Mary Waweru",
+      "username": "marywaweru",
+      "phone": "0722111222",
+      "email": "mary@sokos.co.ke",
+      "verified": true,
+      "docVerified": true,
+      "verificationDocType": "business_permit",
+      "rating": 4.9,
+      "reviewsCount": 24,
+      "locationName": "Westlands, Nairobi",
+      "latitude": -1.2647,
+      "longitude": 36.8044,
+      "createdAt": "2026-04-06T12:50:21.544Z",
+      "onboarded": true,
+      "password": "soko123"
+    },
+    {
+      "id": "usr_davidotieno",
+      "name": "David Otieno",
+      "username": "davidotieno",
+      "phone": "0733444555",
+      "email": "otieno@sokos.co.ke",
+      "verified": false,
+      "docVerified": false,
+      "rating": 4.2,
+      "reviewsCount": 5,
+      "locationName": "Madaraka, Nairobi",
+      "latitude": -1.309,
+      "longitude": 36.8123,
+      "createdAt": "2026-05-26T12:50:21.544Z",
+      "onboarded": true,
+      "password": "soko123"
+    },
+    {
+      "id": "usr_aminamohan",
+      "name": "Amina Mohammed",
+      "username": "aminamohan",
+      "phone": "0700999888",
+      "email": "amina@sokos.co.ke",
+      "verified": true,
+      "docVerified": true,
+      "verificationDocType": "national_id",
+      "rating": 4.7,
+      "reviewsCount": 12,
+      "locationName": "South C, Nairobi",
+      "latitude": -1.3204,
+      "longitude": 36.8267,
+      "createdAt": "2026-04-21T12:50:21.544Z",
+      "onboarded": true,
+      "password": "soko123"
+    },
+    {
+      "id": "usr_buyer1",
+      "name": "Alex Gathu",
+      "username": "alexg",
+      "phone": "0799888777",
+      "email": "gathu@example.com",
+      "verified": false,
+      "docVerified": false,
+      "rating": 5,
+      "reviewsCount": 1,
+      "locationName": "Nairobi CBD",
+      "latitude": -1.2833,
+      "longitude": 36.8219,
+      "createdAt": "2026-06-05T12:50:21.544Z",
+      "onboarded": true,
+      "password": "soko123"
+    }
+  ],
+  "listings": [
+    {
+      "id": "lst_iphone13",
+      "title": "iPhone 13 Pro (128GB, Sierra Blue)",
+      "description": "Excellent condition iPhone 13 Pro. 88% battery health, original screen, no scratches. Comes with a adapter, charging cable and box. Bought locally, selling due to upgrade. Negotiable.",
+      "price": 75000,
+      "category": "Electronics",
+      "images": [
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=600&q=80"
+      ],
+      "vendorId": "usr_johndoe",
+      "vendorName": "John Kamau",
+      "vendorVerified": true,
+      "latitude": -1.2915,
+      "longitude": 36.79,
+      "createdAt": "2026-06-02T12:50:21.544Z",
+      "status": "active",
+      "condition": "like_new"
+    },
+    {
+      "id": "lst_sofa",
+      "title": "L-Shaped Cozy Living Room Sofa",
+      "description": "Hardwood base, gray fabric L-shaped sofa. Very comfortable and durable. 6 months old. No stains or tears. Selling since we are moving houses. Location Westlands.",
+      "price": 45000,
+      "category": "Furniture",
+      "images": [
+        "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=600&q=80"
+      ],
+      "vendorId": "usr_marywaweru",
+      "vendorName": "Mary Waweru",
+      "vendorVerified": true,
+      "latitude": -1.2647,
+      "longitude": 36.8044,
+      "createdAt": "2026-05-31T12:50:21.544Z",
+      "status": "active",
+      "condition": "good"
+    },
+    {
+      "id": "lst_avocado",
+      "title": "Organic Fuerte Avocados - Box of 20",
+      "description": "Freshly harvested giant Hass and Fuerte avocados directly from Meru. Ripe and extremely sweet. Free delivery within 3km of Kilimani or pick up at Kilimani mall.",
+      "price": 1500,
+      "category": "Food & Groceries",
+      "images": [
+        "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=600&q=80"
+      ],
+      "vendorId": "usr_johndoe",
+      "vendorName": "John Kamau",
+      "vendorVerified": true,
+      "latitude": -1.2915,
+      "longitude": 36.79,
+      "createdAt": "2026-06-04T12:50:21.544Z",
+      "status": "active",
+      "condition": "new"
+    },
+    {
+      "id": "lst_mountainbike",
+      "title": "Mountain Bike - Shimano 21 Gear Sport",
+      "description": "Dual suspension mountain bike. Shimano gear system, front and rear disc brakes. Lightweight aluminum alloy frame. Selling at a bargain since I rarely use it.",
+      "price": 18000,
+      "category": "Sports & Outdoors",
+      "images": [
+        "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=600&q=80"
+      ],
+      "vendorId": "usr_davidotieno",
+      "vendorName": "David Otieno",
+      "vendorVerified": false,
+      "latitude": -1.309,
+      "longitude": 36.8123,
+      "createdAt": "2026-06-03T12:50:21.544Z",
+      "status": "active",
+      "condition": "good"
+    },
+    {
+      "id": "lst_dress",
+      "title": "Elegant Ankara Dinner Dress",
+      "description": "Handmade, high-quality Ankara print dinner dress. Fits Size M (10-12). Styled with a modern sash. Worn once for a wedding. Stunning colors.",
+      "price": 3500,
+      "category": "Clothing & Fashion",
+      "images": [
+        "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&q=80"
+      ],
+      "vendorId": "usr_aminamohan",
+      "vendorName": "Amina Mohammed",
+      "vendorVerified": true,
+      "latitude": -1.3204,
+      "longitude": 36.8267,
+      "createdAt": "2026-06-01T12:50:21.544Z",
+      "status": "active",
+      "condition": "like_new"
+    },
+    {
+      "id": "lst_microwave",
+      "title": "Ramtons Digital Microwave 20L",
+      "description": "Ramtons microwave with grill feature. Solves meal preps instantly. Heating elements work perfectly and it is very clean. Only used for 1 year.",
+      "price": 6500,
+      "category": "Electronics",
+      "images": [
+        "https://images.unsplash.com/photo-1585659722982-796fc558af07?auto=format&fit=crop&w=600&q=80"
+      ],
+      "vendorId": "usr_marywaweru",
+      "vendorName": "Mary Waweru",
+      "vendorVerified": true,
+      "latitude": -1.2647,
+      "longitude": 36.8044,
+      "createdAt": "2026-05-26T12:50:21.544Z",
+      "status": "active",
+      "condition": "fair"
+    },
+    {
+      "id": "lst_plumber",
+      "title": "Emergency Plumbing & Hot Water Repair",
+      "description": "Certified 24/7 master plumber in Westlands. Specialized in pipe bursts, clogged drain clearance, kitchen installations, pressure adjustments, and boiler maintenance. Fast service, friendly rates, and fully equipped tool-box.",
+      "price": 3500,
+      "category": "Local Services",
+      "images": [
+        "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80"
+      ],
+      "vendorId": "usr_davidotieno",
+      "vendorName": "David Otieno",
+      "vendorVerified": true,
+      "latitude": -1.2647,
+      "longitude": 36.8044,
+      "createdAt": "2026-06-04T12:50:21.544Z",
+      "status": "active",
+      "condition": "new"
+    },
+    {
+      "id": "lst_electrician",
+      "title": "Residential Electrical Installation & Safety Audits",
+      "description": "Need socket replacements, cooker wiring, fuse board repairs, or safety checks? Standard electrical installations and troubleshooting services done by an EPRA licensed electrical contractor. Safe and highly standard workmanship.",
+      "price": 4000,
+      "category": "Local Services",
+      "images": [
+        "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80"
+      ],
+      "vendorId": "usr_johndoe",
+      "vendorName": "John Kamau",
+      "vendorVerified": true,
+      "latitude": -1.2915,
+      "longitude": 36.79,
+      "createdAt": "2026-06-03T12:50:21.544Z",
+      "status": "active",
+      "condition": "new"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg_1",
+      "senderId": "usr_buyer1",
+      "receiverId": "usr_johndoe",
+      "listingId": "lst_iphone13",
+      "text": "Hi John, is this iPhone 13 Pro still available? What is the lowest price you would take?",
+      "createdAt": "2026-06-04T12:50:21.544Z"
+    },
+    {
+      "id": "msg_2",
+      "senderId": "usr_johndoe",
+      "receiverId": "usr_buyer1",
+      "listingId": "lst_iphone13",
+      "text": "Hi Alex, yes it is! The battery is at 88%. I can take 72,000 Ksh if we meet in Prestige plaza Kilimani today.",
+      "createdAt": "2026-06-04T13:50:21.544Z"
+    },
+    {
+      "id": "msg_3",
+      "senderId": "usr_buyer1",
+      "receiverId": "usr_johndoe",
+      "listingId": "lst_iphone13",
+      "text": "That sounds perfect. I am in Westlands but can drive to Kilimani around 3 PM! Can I pay via M-Pesa on spot?",
+      "createdAt": "2026-06-04T14:50:21.544Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev_1",
+      "targetUserId": "usr_johndoe",
+      "reviewerId": "usr_marywaweru",
+      "reviewerName": "Mary Waweru",
+      "rating": 5,
+      "text": "Excellent seller! Very trustworthy. Legitimate iPhone products. The coordinate meet-up at Prestige Plaza was extremely safe.",
+      "createdAt": "2026-05-21T12:50:21.544Z"
+    },
+    {
+      "id": "rev_2",
+      "targetUserId": "usr_marywaweru",
+      "reviewerId": "usr_johndoe",
+      "reviewerName": "John Kamau",
+      "rating": 5,
+      "text": "Excellent buyer and seller. Courteous, prompt M-Pesa payment, and very professional.",
+      "createdAt": "2026-05-11T12:50:21.544Z"
+    }
+  ],
+  "orders": [],
+  "notifications": []
+}
