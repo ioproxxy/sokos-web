@@ -7,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import pg from 'pg';
 import dotenv from 'dotenv';
-import { User, Listing, Message, Review, Order, Notification } from '../types.js';
+import { User, Listing, Message, Review, Order, Notification } from './types.js';
 
 dotenv.config();
 
