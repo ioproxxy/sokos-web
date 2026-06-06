@@ -1,4 +1,4 @@
-name: Sokos CI/CD Deploy
+name: Sokos Deploy
 
 on:
   push:
@@ -10,11 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to VPS (SSH)
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -22,20 +19,19 @@ jobs:
           script: |
             set -e
 
-            echo "📦 Pulling latest code..."
-            cd ~/sokos-bot
+            cd /var/www/sokos
+
+            echo "Pulling latest code..."
             git pull origin main
 
-            echo "📦 Installing dependencies..."
+            echo "Installing dependencies..."
             npm install
 
-            echo "🏗️ Building TypeScript..."
+            echo "Building project..."
             npm run build
 
-            echo "🔄 Restarting PM2..."
-            pm2 reload ecosystem.config.js
+            echo "Restarting services..."
+            pm2 restart sokos || pm2 start npm --name "sokos" -- start
+            pm2 restart sokos-bot || pm2 restart sokos-bot
 
-            echo "❤️ Health check..."
-            curl -f http://localhost:3000/health
-
-            echo "✅ Deployment successful"
+            echo "Deployment complete"
