@@ -1,8 +1,39 @@
+# Dependencies
 node_modules/
+
+# Build output
 build/
 dist/
+frontend/dist/
+backend/dist/
+
+# Coverage reports
 coverage/
+
+# OS artifacts
 .DS_Store
+Thumbs.db
+
+# Logs
 *.log
+logs/*.log
+logs/*.txt
+!logs/.gitkeep
+
+# Environment variables
 .env*
 !.env.example
+
+# TypeScript build info
+*.tsbuildinfo
+
+# PM2
+.pm2/
+
+# Editor directories
+.vscode/
+.idea/
+
+# Temp scaffold scripts (no longer needed after Phase 1)
+scripts/scaffold.ps1
+scripts/gitkeep.ps1
