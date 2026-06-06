@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dev": "scripts\\dev.sh",
-    "build": "scripts\\build.sh",
+    "build": "./scripts/build.sh",
     "migrate": "scripts\\migrate.sh",
     "dev:frontend": "npm run dev --workspace frontend",
     "dev:backend": "npm run dev --workspace backend",
