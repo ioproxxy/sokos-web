@@ -8,9 +8,9 @@ import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
-import { db, getDistance } from './src/server/db.ts'; // Use ESM extension if Node requires, or just import from ts/js
-import { triggerStkPush } from './src/server/mpesa.ts';
-import { User, Listing, Message, Order, Notification, Review } from './src/types.ts';
+import { db, getDistance } from '/src/server/db.ts'; // Use ESM extension if Node requires, or just import from ts/js
+import { triggerStkPush } from '/src/server/mpesa.ts';
+import { User, Listing, Message, Order, Notification, Review } from '/src/types.ts';
 
 dotenv.config();
 
