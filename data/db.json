@@ -87,6 +87,24 @@
       "createdAt": "2026-06-05T12:50:21.544Z",
       "onboarded": true,
       "password": "soko123"
+    },
+    {
+      "id": "usr_mq2tjbt2",
+      "name": "Luke David",
+      "username": "luka",
+      "phone": "722265234",
+      "email": "luka@gmail.com",
+      "password": "1456",
+      "verified": false,
+      "docVerified": false,
+      "rating": 5,
+      "reviewsCount": 0,
+      "locationName": "Nairobi CBD",
+      "latitude": -1.2833,
+      "longitude": 36.8219,
+      "createdAt": "2026-06-06T20:41:33.830Z",
+      "onboarded": true,
+      "avatarUrl": "magenta"
     }
   ],
   "listings": [
@@ -233,6 +251,24 @@
       "createdAt": "2026-06-03T12:50:21.544Z",
       "status": "active",
       "condition": "new"
+    },
+    {
+      "id": "lst_1780778567277",
+      "title": "iphone",
+      "description": "kkk",
+      "price": 80000,
+      "category": "Electronics",
+      "images": [
+        "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=300&q=80"
+      ],
+      "vendorId": "usr_mq2tjbt2",
+      "vendorName": "Luke David",
+      "vendorVerified": false,
+      "latitude": -1.2833,
+      "longitude": 36.8219,
+      "createdAt": "2026-06-06T20:42:47.277Z",
+      "status": "active",
+      "condition": "good"
     }
   ],
   "messages": [
@@ -259,6 +295,70 @@
       "listingId": "lst_iphone13",
       "text": "That sounds perfect. I am in Westlands but can drive to Kilimani around 3 PM! Can I pay via M-Pesa on spot?",
       "createdAt": "2026-06-04T14:50:21.544Z"
+    },
+    {
+      "id": "msg_1780784535531",
+      "senderId": "usr_buyer1",
+      "receiverId": "usr",
+      "listingId": "usr",
+      "text": "hey",
+      "createdAt": "2026-06-06T22:22:15.531Z"
+    },
+    {
+      "id": "msg_1780784599774",
+      "senderId": "usr_buyer1",
+      "receiverId": "usr_mq2tjbt2",
+      "listingId": "lst_1780778567277",
+      "text": "Hello, I am interested in your item \"iphone\" listed within 5 km of my residence. Is it available for trade?",
+      "createdAt": "2026-06-06T22:23:19.774Z"
+    },
+    {
+      "id": "msg_1780784603783",
+      "senderId": "usr_buyer1",
+      "receiverId": "usr",
+      "listingId": "usr",
+      "text": "hey",
+      "createdAt": "2026-06-06T22:23:23.783Z"
+    },
+    {
+      "id": "msg_1780784646830",
+      "senderId": "usr_marywaweru",
+      "receiverId": "usr_johndoe",
+      "listingId": "lst_iphone13",
+      "text": "Hello, I am interested in your item \"iPhone 13 Pro (128GB, Sierra Blue)\" listed within 5 km of my residence. Is it available for trade?",
+      "createdAt": "2026-06-06T22:24:06.830Z"
+    },
+    {
+      "id": "msg_1780784652075",
+      "senderId": "usr_marywaweru",
+      "receiverId": "usr",
+      "listingId": "usr",
+      "text": "hello",
+      "createdAt": "2026-06-06T22:24:12.075Z"
+    },
+    {
+      "id": "msg_1780784831956",
+      "senderId": "usr_marywaweru",
+      "receiverId": "usr_mq2tjbt2",
+      "listingId": "lst_1780778567277",
+      "text": "Hello, I am interested in your item \"iphone\" listed within 5 km of my residence. Is it available for trade?",
+      "createdAt": "2026-06-06T22:27:11.956Z"
+    },
+    {
+      "id": "msg_1780784840103",
+      "senderId": "usr_marywaweru",
+      "receiverId": "usr",
+      "listingId": "usr",
+      "text": "hello you",
+      "createdAt": "2026-06-06T22:27:20.103Z"
+    },
+    {
+      "id": "msg_1780785101727",
+      "senderId": "usr_johndoe",
+      "receiverId": "usr_mq2tjbt2",
+      "listingId": "lst_1780778567277",
+      "text": "Hello, I am interested in your item \"iphone\" listed within 5 km of my residence. Is it available for trade?",
+      "createdAt": "2026-06-06T22:31:41.727Z"
     }
   ],
   "reviews": [
@@ -282,5 +382,95 @@
     }
   ],
   "orders": [],
-  "notifications": []
+  "notifications": [
+    {
+      "id": "notif_welcome_1780778493831",
+      "userId": "usr_mq2tjbt2",
+      "title": "Karibu Sokos! 🛍️",
+      "message": "Welcome to the safest local merchant trade coordinate exchange in Nairobi. Please finish your onboarding to discover close-proximity goods!",
+      "type": "verification",
+      "read": true,
+      "createdAt": "2026-06-06T20:41:33.831Z"
+    },
+    {
+      "id": "notif_msg_1780784535532",
+      "userId": "usr",
+      "title": "New message on Soko",
+      "message": "You received a message: \"hey\"",
+      "type": "message",
+      "read": false,
+      "link": "/messages?listingId=usr&userId=usr_buyer1",
+      "createdAt": "2026-06-06T22:22:15.532Z"
+    },
+    {
+      "id": "notif_msg_1780784599775",
+      "userId": "usr_mq2tjbt2",
+      "title": "New message on Soko",
+      "message": "You received a message: \"Hello, I am interested in your...\"",
+      "type": "message",
+      "read": true,
+      "link": "/messages?listingId=lst_1780778567277&userId=usr_buyer1",
+      "createdAt": "2026-06-06T22:23:19.775Z"
+    },
+    {
+      "id": "notif_msg_1780784603783",
+      "userId": "usr",
+      "title": "New message on Soko",
+      "message": "You received a message: \"hey\"",
+      "type": "message",
+      "read": false,
+      "link": "/messages?listingId=usr&userId=usr_buyer1",
+      "createdAt": "2026-06-06T22:23:23.783Z"
+    },
+    {
+      "id": "notif_msg_1780784646831",
+      "userId": "usr_johndoe",
+      "title": "New message on Soko",
+      "message": "You received a message: \"Hello, I am interested in your...\"",
+      "type": "message",
+      "read": true,
+      "link": "/messages?listingId=lst_iphone13&userId=usr_marywaweru",
+      "createdAt": "2026-06-06T22:24:06.831Z"
+    },
+    {
+      "id": "notif_msg_1780784652075",
+      "userId": "usr",
+      "title": "New message on Soko",
+      "message": "You received a message: \"hello\"",
+      "type": "message",
+      "read": false,
+      "link": "/messages?listingId=usr&userId=usr_marywaweru",
+      "createdAt": "2026-06-06T22:24:12.075Z"
+    },
+    {
+      "id": "notif_msg_1780784831956",
+      "userId": "usr_mq2tjbt2",
+      "title": "New message on Soko",
+      "message": "You received a message: \"Hello, I am interested in your...\"",
+      "type": "message",
+      "read": true,
+      "link": "/messages?listingId=lst_1780778567277&userId=usr_marywaweru",
+      "createdAt": "2026-06-06T22:27:11.956Z"
+    },
+    {
+      "id": "notif_msg_1780784840103",
+      "userId": "usr",
+      "title": "New message on Soko",
+      "message": "You received a message: \"hello you\"",
+      "type": "message",
+      "read": false,
+      "link": "/messages?listingId=usr&userId=usr_marywaweru",
+      "createdAt": "2026-06-06T22:27:20.103Z"
+    },
+    {
+      "id": "notif_msg_1780785101728",
+      "userId": "usr_mq2tjbt2",
+      "title": "New message on Soko",
+      "message": "You received a message: \"Hello, I am interested in your...\"",
+      "type": "message",
+      "read": false,
+      "link": "/messages?listingId=lst_1780778567277&userId=usr_johndoe",
+      "createdAt": "2026-06-06T22:31:41.728Z"
+    }
+  ]
 }
