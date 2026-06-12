@@ -1,10 +1,14 @@
-#!/usr/bin/env python3
+#!/var/www/sokos/.venv/bin/python
 """
 Sokos Favicon Generator
 Generates all required favicon and logo files from a source image.
 
 Usage:
-    python3 generate_favicons.py sokos-logo.png
+    /var/www/sokos/.venv/bin/python generate_favicons.py sokos-logo.png
+    
+    Or:
+    
+    python3 generate_favicons.py sokos-logo.png (if in virtual environment)
     
     Then copy all generated files to /var/www/sokos/public/
 """
