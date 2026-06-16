@@ -37,11 +37,11 @@ import { User, Listing, Message, Conversation, Review, Order, Notification, Sear
 import { apiFetch } from './utils';
 import VerifiedBadge from './components/VerifiedBadge.tsx';
 import SaasMerchantHub from './components/SaaSMerchantHub.tsx';
-import DevConsole from './components/DevConsole.tsx';
 import AuthGateway from './components/AuthGateway.tsx';
 import OnboardingScreen from './components/OnboardingScreen.tsx';
 import MarketMap from './components/MarketMap.tsx';
 import AdminDashboard from './components/AdminDashboard.tsx';
+import DevConsole from './components/DevConsole.tsx';
 import { NAIROBI_WARDS } from './wards';
 
 // Categories standard
@@ -2845,18 +2845,16 @@ export default function App() {
           </div>
         </div>
       )}
-
-      {/* Floating VPS Trade DevConsole panel */}
       {currentUser && (
         <DevConsole
           currentUser={currentUser}
-          onUserSwitched={() => {
+          onUserSwitched={(user) => {
             setSessionCount(prev => prev + 1);
+            setCurrentUser(user);
             fetchListings();
             fetchConversations();
             fetchOrders();
             fetchNotifications();
-            alert(`Switched active session. Relocating data context and listings...`);
           }}
           orders={orders}
           onOrderUpdated={() => {
@@ -2865,7 +2863,6 @@ export default function App() {
           }}
         />
       )}
-
     </div>
   );
 }
