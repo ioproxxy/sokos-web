@@ -1,7 +1,7 @@
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
- */
+ 
 
 import React, { useState } from 'react';
 import { User, Order } from '../types';
@@ -124,7 +124,7 @@ CMD ["npm", "start"]`;
   return (
     <>
       {/* Floating Toggle Button */}
-      <button
+    <!--      <button
         id="btn_dev_console_toggle"
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-20 right-4 z-50 flex items-center gap-2 bg-slate-900 border border-slate-700 text-slate-100 hover:bg-slate-800 active:scale-95 px-3.5 py-2.5 rounded-full shadow-2xl transition duration-150 text-xs font-mono"
@@ -496,6 +496,9 @@ CREATE TABLE IF NOT EXISTS users (
           </div>
         </div>
       )}
-    </>
+    -->
+    
   );
+
 }
+*/
