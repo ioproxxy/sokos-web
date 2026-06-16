@@ -1,0 +1,6 @@
+{
+  "name": "Sokos",
+  "description": "Sokos connects local vendors and buyers within a 5 km radius for direct trade, secure messaging, M-Pesa STK push payments, seller ratings, and verified safety profiles.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
