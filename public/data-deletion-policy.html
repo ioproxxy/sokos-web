@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Deletion Policy - Soko Nairobi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-zinc-50 text-zinc-900 min-h-screen flex flex-col antialiased">
+  <!-- Navbar -->
+  <header class="border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-xs">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2">
+        <span class="text-xl font-display font-bold tracking-tight text-zinc-950 flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          Soko <span class="text-emerald-600 font-extrabold">Nairobi</span>
+        </span>
+      </a>
+      <div class="flex items-center gap-4 text-xs font-semibold text-zinc-500">
+        <a href="/privacy-policy.html" class="hover:text-emerald-600 transition">Privacy</a>
+        <a href="/terms-of-service.html" class="hover:text-emerald-600 transition">Terms</a>
+        <a href="/data-deletion-policy.html" class="hover:text-emerald-600 transition">Data Deletion</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-3xl mx-auto w-full px-4 py-12">
+    <article class="bg-white rounded-3xl border border-zinc-200/80 p-8 md:p-12 shadow-xs space-y-6">
+      <div class="space-y-4">
+        <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-extrabold text-emerald-600">
+          <span>🗑️ Data Erasure</span>
+          <span>•</span>
+          <span>Updated June 28, 2026</span>
+        </div>
+        <h1 class="text-3xl font-display font-black text-zinc-950 tracking-tight">Data Deletion Policy</h1>
+        <p class="text-zinc-650 text-sm leading-relaxed">
+          To comply with Google Play Store policies and Facebook (Meta) Platform Developer Rules (Section 3 - Data Deletion Request Callback), Soko Nairobi provides transparent, swift tools to request the deletion of all personal data, listings, chat logs, and coordinate bindings.
+        </p>
+      </div>
+
+      <div class="border-t border-zinc-200 pt-6 space-y-6 text-sm text-zinc-700 leading-relaxed">
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">Method 1: Direct One-Click In-App Purge (Recommended)</h2>
+          <p>
+            The easiest way to invoke the "Right to be Forgotten" is directly through the Soko Nairobi portal. This triggers an automated, instant cascading deletion inside our PostgreSQL database:
+          </p>
+          <div class="bg-zinc-50 border border-zinc-200 rounded-3xl p-5 space-y-2 text-zinc-500">
+            <p class="font-bold text-zinc-800 text-xs">Instructions:</p>
+            <ol class="list-decimal pl-5 space-y-1">
+              <li>Log in to your Soko Nairobi account using your credentials, Google Account, or Facebook Login.</li>
+              <li>Open the bottom navigation menu and click on the <strong>Profile Tab</strong>.</li>
+              <li>Scroll to the bottom of your Profile card where you will find the red <strong>"Delete Soko Account & Purge Data"</strong> button.</li>
+              <li>Confirm your selection in the warning modal.</li>
+            </ol>
+            <p class="text-rose-600 font-bold text-xs mt-2">
+              ⚠️ Warning: This action is 100% permanent and irreversible. Your active listings, rating history, chat negotiations, and system notifications will be instantly deleted.
+            </p>
+          </div>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">Method 2: Meta (Facebook) Data Deletion Callback URL</h2>
+          <p>
+            If you linked Soko Nairobi via Facebook Login and wish to request data deletion via Meta's automated callback engine:
+          </p>
+          <ol class="list-decimal pl-5 space-y-2 text-zinc-500">
+            <li>Go to your personal Facebook Account's <strong>Settings & Privacy > Settings</strong>.</li>
+            <li>In the left sidebar, click <strong>Apps and Websites</strong>.</li>
+            <li>Search for <strong>"Soko Nairobi"</strong> and click <strong>Remove</strong>.</li>
+            <li>In the prompt, select the option to send a deletion request. This will dispatch a signed webhook request to our Meta callback endpoint.</li>
+            <li>Our endpoint immediately logs the deletion command and returns a unique confirmation code. You can verify your status anytime.</li>
+          </ol>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">Method 3: Manual Email Data Removal Request</h2>
+          <p>
+            If you are unable to access the application dashboard or require administrator assistance:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-zinc-500">
+            <li>Send an email request to our lead developer at <a href="mailto:ioproxxy@gmail.com" class="text-emerald-600 font-bold hover:underline">ioproxxy@gmail.com</a>.</li>
+            <li>Subject: <strong>Soko Nairobi Data Deletion Request - [Your Username]</strong></li>
+            <li>Please provide either your registered email address, username, or your Safaricom mobile phone number to allow verification.</li>
+            <li>Our administrative team will review, manually execute the delete queries, and reply with a written confirmation of erasure within 24 hours.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">4. What Data is Cleared on Deletion?</h2>
+          <p>
+            When a deletion is executed (either via in-app wipe, Meta webhook, or email request), the following data is permanently purged:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <div class="p-3 bg-rose-50/50 border border-rose-100 rounded-2xl">
+              <span class="text-rose-800 font-bold block text-xs">❌ Identity Parameters</span>
+              <span class="text-zinc-500 text-[11px] mt-1 block">Full Name, Email Address, Avatar URL, and Password hashes are deleted.</span>
+            </div>
+            <div class="p-3 bg-rose-50/50 border border-rose-100 rounded-2xl">
+              <span class="text-rose-800 font-bold block text-xs">❌ Classified Listings</span>
+              <span class="text-zinc-500 text-[11px] mt-1 block">All active, pending, or sold product listings are completely unlinked and deleted.</span>
+            </div>
+            <div class="p-3 bg-rose-50/50 border border-rose-100 rounded-2xl">
+              <span class="text-rose-800 font-bold block text-xs">❌ Chat Messages</span>
+              <span class="text-zinc-500 text-[11px] mt-1 block">All sent and received peer-to-peer message histories are erased.</span>
+            </div>
+            <div class="p-3 bg-rose-50/50 border border-rose-100 rounded-2xl">
+              <span class="text-rose-800 font-bold block text-xs">❌ Location Coordinates</span>
+              <span class="text-zinc-500 text-[11px] mt-1 block">All ward selections, precise calibration latitude/longitude settings are purged.</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-zinc-100 py-8 text-center text-xs text-zinc-500 font-medium">
+    <div class="max-w-4xl mx-auto px-4 space-y-2">
+      <p>© 2026 Soko Nairobi • Safe Proximity classified trade sandbox for Nairobi traders.</p>
+      <p>Questions or Compliance? Email <a href="mailto:ioproxxy@gmail.com" class="text-emerald-600 font-bold hover:underline">ioproxxy@gmail.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>

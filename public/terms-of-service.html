@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service - Soko Nairobi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-zinc-50 text-zinc-900 min-h-screen flex flex-col antialiased">
+  <!-- Navbar -->
+  <header class="border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-xs">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2">
+        <span class="text-xl font-display font-bold tracking-tight text-zinc-950 flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          Soko <span class="text-emerald-600 font-extrabold">Nairobi</span>
+        </span>
+      </a>
+      <div class="flex items-center gap-4 text-xs font-semibold text-zinc-500">
+        <a href="/privacy-policy.html" class="hover:text-emerald-600 transition">Privacy</a>
+        <a href="/terms-of-service.html" class="hover:text-emerald-600 transition">Terms</a>
+        <a href="/data-deletion-policy.html" class="hover:text-emerald-600 transition">Data Deletion</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-3xl mx-auto w-full px-4 py-12">
+    <article class="bg-white rounded-3xl border border-zinc-200/80 p-8 md:p-12 shadow-xs space-y-6">
+      <div class="space-y-4">
+        <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-extrabold text-emerald-600">
+          <span>⚖️ Legal Agreements</span>
+          <span>•</span>
+          <span>Updated June 28, 2026</span>
+        </div>
+        <h1 class="text-3xl font-display font-black text-zinc-950 tracking-tight">Terms of Service</h1>
+        <p class="text-zinc-650 text-sm leading-relaxed">
+          Welcome to Soko Nairobi. By visiting our application, registering a merchant profile, or using Google or Facebook single sign-on, you agree to bound yourself legally to the following terms and guidelines.
+        </p>
+      </div>
+
+      <div class="border-t border-zinc-200 pt-6 space-y-6 text-sm text-zinc-700 leading-relaxed">
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">1. Platform Services & Eligibility</h2>
+          <p>
+            Soko Nairobi is a local marketplace designed to coordinate peer-to-peer commerce and escrow-supported product listings in Nairobi, Kenya. To utilize our interactive trade networks:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-zinc-500">
+            <li>You must be at least 18 years old or possess legal guardian consent.</li>
+            <li>You must establish an active merchant identity linked with your Safaricom M-Pesa mobile number to participate in escrow flows.</li>
+            <li>You represent that all details provided during onboarding are accurate.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">2. Code of Conduct & Prohibited Items</h2>
+          <p>
+            Merchants have the right to post classified listings for goods (electronics, furniture, clothing, collectibles, etc.). However, you are strictly prohibited from publishing:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-zinc-500">
+            <li>Counterfeit goods, illegal services, chemical substances, or firearms.</li>
+            <li>Misleading coordinates targeting areas outside of your active Nairobi County sub-counties.</li>
+            <li>Spam listings, repetitive text, or malicious hyperlinks designed to phish other local users.</li>
+            <li>Harassment, abusive text, or spam inside our direct peer-to-peer chats.</li>
+          </ul>
+          <p class="text-zinc-400 text-xs italic">
+            Note: Soko admins proactively audit listing status. Unapproved or spam-flagged cards will be removed from the Compass Radar instantly.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">3. Escrow and Payment Simulation Disclaimer</h2>
+          <p>
+            Soko Nairobi utilizes Safaricom Lipa Na M-Pesa STK Push API queries for transactions.
+            All payments triggered are for simulation and direct proof-of-concept testing:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-zinc-500">
+            <li>Unless your workspace is configured with production M-Pesa Daraja Credentials, payments are completed inside our safe, sandbox environment.</li>
+            <li>We do not hold or store direct banking credentials. All payment confirmations are logged on our local secure ledger.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">4. Disclaimer of Warranties & Liability Limits</h2>
+          <p>
+            Soko Nairobi operates "as is" and "as available". Physical handshakes, exchange locations, and trade resolutions are negotiated strictly between individual buyers and sellers. We assume zero liability for physical safety, product performance, or direct disputes occurring during local face-to-face meetups.
+          </p>
+          <div class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs font-semibold leading-relaxed">
+            🤝 Safety Guidance: Always conduct trades in highly populated public locations such as Nairobi CBD shopping complexes, banking halls, or security lobbies. Never visit secluded coordinates for trades.
+          </div>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">5. Contract Deletion and Account Removal</h2>
+          <p>
+            You can terminate these Terms at any time by deleting your account. This will completely wipe all your records. Please read our <a href="/data-deletion-policy.html" class="text-emerald-600 font-bold hover:underline">Data Deletion Policy</a> for steps to execute your right to be forgotten.
+          </p>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-zinc-100 py-8 text-center text-xs text-zinc-500 font-medium">
+    <div class="max-w-4xl mx-auto px-4 space-y-2">
+      <p>© 2026 Soko Nairobi • Safe Proximity classified trade sandbox for Nairobi traders.</p>
+      <p>Questions or Compliance? Email <a href="mailto:ioproxxy@gmail.com" class="text-emerald-600 font-bold hover:underline">ioproxxy@gmail.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>

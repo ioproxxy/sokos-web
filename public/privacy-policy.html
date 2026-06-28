@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Soko Nairobi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-zinc-50 text-zinc-900 min-h-screen flex flex-col antialiased">
+  <!-- Navbar -->
+  <header class="border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-xs">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2">
+        <span class="text-xl font-display font-bold tracking-tight text-zinc-950 flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          Soko <span class="text-emerald-600 font-extrabold">Nairobi</span>
+        </span>
+      </a>
+      <div class="flex items-center gap-4 text-xs font-semibold text-zinc-500">
+        <a href="/privacy-policy.html" class="hover:text-emerald-600 transition">Privacy</a>
+        <a href="/terms-of-service.html" class="hover:text-emerald-600 transition">Terms</a>
+        <a href="/data-deletion-policy.html" class="hover:text-emerald-600 transition">Data Deletion</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-3xl mx-auto w-full px-4 py-12">
+    <article class="bg-white rounded-3xl border border-zinc-200/80 p-8 md:p-12 shadow-xs space-y-6">
+      <div class="space-y-4">
+        <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-extrabold text-emerald-600">
+          <span>🛡️ Compliance Registry</span>
+          <span>•</span>
+          <span>Updated June 28, 2026</span>
+        </div>
+        <h1 class="text-3xl font-display font-black text-zinc-950 tracking-tight">Privacy Policy</h1>
+        <p class="text-zinc-600 text-sm leading-relaxed">
+          Soko Nairobi ("we", "our", or "us") operates the local proximity trader platform Sokos.co.ke (accessible at https://sokos.co.ke). 
+          We are fully committed to protecting your privacy and personal identifiers. This document outlines how 
+          we collect, manage, and delete data, specifically tailored to satisfy standard Meta (Facebook) 
+          and Google OAuth verification requirements.
+        </p>
+      </div>
+
+      <div class="border-t border-zinc-200 pt-6 space-y-6 text-sm text-zinc-700 leading-relaxed">
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">1. OAuth Identity Authentication & Data Collected</h2>
+          <p>
+            To enable safe and fast registration without password overhead, we support single-sign-on (SSO) authentication 
+            via Google Accounts and Meta (Facebook) Login. When you link your Soko Nairobi account with these providers, 
+            we request access to your public profile parameters. We collect and store:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-zinc-500">
+            <li><strong>Your Legal Name:</strong> Used to display on your vendor cards, review panels, and buyer-seller trust handshakes.</li>
+            <li><strong>Your Email Address:</strong> Used as a secure contact channel, primary account identification, and compliance notifications.</li>
+            <li><strong>Your Profile Avatar Image:</strong> Used as your trade session profile picture to establish friendly identity.</li>
+            <li><strong>Provider Unique Social ID:</strong> Stored securely to manage the authentication handshakes on subsequent visits.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">2. Proximity Coordinates & Privacy Safeguards</h2>
+          <p>
+            Soko Nairobi is a localized marketplace matching traders within a 5 kilometer coordinate threshold.
+            Our platform requests your location coordinates (Latitude and Longitude) based on Nairobi County Wards or your browser's GPS:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-zinc-500">
+            <li><strong>Coordinate Protection:</strong> Your exact GPS coordinates are <strong>NEVER</strong> shown to other users. We inject a slight random fuzzing algorithm (offsets of 100 to 150 meters) on all maps to ensure your physical residence is 100% hidden.</li>
+            <li><strong>Proximity Computation:</strong> We only use the mathematical distance vectors on the server to prioritize sorting nearby listings first on user dashboards.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">3. Safe Data Sharing Policy</h2>
+          <p>
+            Soko Nairobi is built with zero third-party tracking, profiling, or cookie monetization. 
+            We do not sell, rent, or lease any merchant information to advertisers. Your data is strictly shared with other users only in the following active trade scenarios:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-zinc-500">
+            <li><strong>Active Escrow Transactions:</strong> When a buyer initiates an order and selects M-Pesa STK Push payment, we disclose the seller's verified contact number to complete the mobile transfer.</li>
+            <li><strong>Chat Messages:</strong> Communication text is stored securely and is only visible to the two active participants of the chat box.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">4. Your Control: Instantly Revoking & Deleting Data</h2>
+          <p>
+            We believe in absolute data ownership. You have complete control to revoke, request, or delete your entire profile footprint from our servers instantly:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-zinc-500">
+            <li><strong>In-App One-Click Wipe:</strong> Navigate to your <strong>Profile Tab</strong> in the dashboard and click "Delete Account". This triggers a cascading SQL purge, deleting your user record, listings, chat history, notifications, and location coordinates within milliseconds.</li>
+            <li><strong>External Provider Removal:</strong> You can revoke Soko's access anytime via your Google App permissions or Facebook Apps Settings page. Review our <a href="/data-deletion-policy.html" class="text-emerald-600 font-bold hover:underline">Data Deletion Policy</a> for specific instructions.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-lg font-display font-bold text-zinc-900">5. Compliance Queries & Contact</h2>
+          <p>
+            For any privacy audits, regulatory concerns, or manual deletion requests, please contact our lead administrator directly:
+          </p>
+          <div class="p-4 bg-zinc-50 border border-zinc-200 rounded-2xl font-mono text-xs text-zinc-500">
+            Admin Email: <a href="mailto:ioproxxy@gmail.com" class="text-emerald-600 font-bold hover:underline">ioproxxy@gmail.com</a><br>
+            Sokos Local Trade Platform Sandbox Portal
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-zinc-100 py-8 text-center text-xs text-zinc-500 font-medium">
+    <div class="max-w-4xl mx-auto px-4 space-y-2">
+      <p>© 2026 Soko Nairobi • Safe Proximity classified trade sandbox for Nairobi traders.</p>
+      <p>Questions or Compliance? Email <a href="mailto:ioproxxy@gmail.com" class="text-emerald-600 font-bold hover:underline">ioproxxy@gmail.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>

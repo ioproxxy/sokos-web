@@ -124,6 +124,24 @@ export default function App() {
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
+  // SPA Compliance Routing State
+  const [compliancePath, setCompliancePath] = useState<'privacy' | 'terms' | 'data-deletion' | 'data-deletion-status' | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      if (path === '/privacy-policy' || path === '/privacy-policy.html') {
+        setCompliancePath('privacy');
+      } else if (path === '/terms-of-service' || path === '/terms-of-service.html') {
+        setCompliancePath('terms');
+      } else if (path === '/data-deletion-policy' || path === '/data-deletion-policy.html') {
+        setCompliancePath('data-deletion');
+      } else if (path === '/data-deletion-status' || path === '/data-deletion-status.html') {
+        setCompliancePath('data-deletion-status');
+      }
+    }
+  }, []);
+
   // Geolocation Calibration States
   const [calibratingGps, setCalibratingGps] = useState(false);
   const [gpsCalibrateError, setGpsCalibrateError] = useState<string | null>(null);
@@ -882,6 +900,358 @@ export default function App() {
     );
   };
 
+  if (compliancePath) {
+    return (
+      <div className="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col font-sans select-text">
+        {/* Navbar */}
+        <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 sticky top-0 z-50 shadow-sm">
+          <div className="max-w-4xl mx-auto px-5 py-4 flex items-center justify-between">
+            <button 
+              onClick={() => { 
+                setCompliancePath(null); 
+                if (typeof window !== 'undefined') window.history.pushState({}, '', '/'); 
+              }} 
+              className="flex items-center gap-2 cursor-pointer bg-transparent border-none text-left"
+            >
+              <span className="text-xl font-display font-bold tracking-tight text-zinc-950 dark:text-white flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                Soko <span className="text-emerald-600 font-extrabold">Nairobi</span>
+              </span>
+            </button>
+            <div className="flex items-center gap-4 text-[11px] font-extrabold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider font-mono">
+              <button 
+                onClick={() => {
+                  setCompliancePath('privacy');
+                  if (typeof window !== 'undefined') window.history.pushState({}, '', '/privacy-policy');
+                }} 
+                className={`hover:text-emerald-600 transition cursor-pointer ${compliancePath === 'privacy' ? 'text-emerald-500 border-b-2 border-emerald-500 pb-0.5' : ''}`}
+              >
+                Privacy
+              </button>
+              <button 
+                onClick={() => {
+                  setCompliancePath('terms');
+                  if (typeof window !== 'undefined') window.history.pushState({}, '', '/terms-of-service');
+                }} 
+                className={`hover:text-emerald-600 transition cursor-pointer ${compliancePath === 'terms' ? 'text-emerald-500 border-b-2 border-emerald-500 pb-0.5' : ''}`}
+              >
+                Terms
+              </button>
+              <button 
+                onClick={() => {
+                  setCompliancePath('data-deletion');
+                  if (typeof window !== 'undefined') window.history.pushState({}, '', '/data-deletion-policy');
+                }} 
+                className={`hover:text-emerald-600 transition cursor-pointer ${compliancePath === 'data-deletion' ? 'text-emerald-500 border-b-2 border-emerald-500 pb-0.5' : ''}`}
+              >
+                Data Deletion
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <main className="flex-1 max-w-3xl mx-auto w-full px-5 py-12">
+          <article className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/85 dark:border-zinc-800 p-8 md:p-12 shadow-sm space-y-6">
+            
+            {compliancePath === 'privacy' && (
+              <div className="space-y-6 animate-fade-in">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-extrabold text-emerald-600">
+                    <span>🛡️ Compliance Registry</span>
+                    <span>•</span>
+                    <span>Updated June 28, 2026</span>
+                  </div>
+                  <h1 className="text-3xl font-display font-black text-zinc-950 dark:text-white tracking-tight">Privacy Policy</h1>
+                  <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed">
+                    Soko Nairobi ("we", "our", or "us") operates the local proximity trader platform Sokos.co.ke (accessible at https://sokos.co.ke). 
+                    We are fully committed to protecting your privacy and personal identifiers. This document outlines how 
+                    we collect, manage, and delete data, specifically tailored to satisfy standard Meta (Facebook) 
+                    and Google OAuth verification requirements.
+                  </p>
+                </div>
+
+                <div className="border-t border-zinc-200 dark:border-zinc-800 pt-6 space-y-6 text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">1. OAuth Identity Authentication & Data Collected</h2>
+                    <p>
+                      To enable safe and fast registration without password overhead, we support single-sign-on (SSO) authentication 
+                      via Google Accounts and Meta (Facebook) Login. When you link your Soko Nairobi account with these providers, 
+                      we request access to your public profile parameters. We collect and store:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1.5 text-zinc-500 dark:text-zinc-400">
+                      <li><strong>Your Legal Name:</strong> Used to display on your vendor cards, review panels, and buyer-seller trust handshakes.</li>
+                      <li><strong>Your Email Address:</strong> Used as a secure contact channel, primary account identification, and compliance notifications.</li>
+                      <li><strong>Your Profile Avatar Image:</strong> Used as your trade session profile picture to establish friendly identity.</li>
+                      <li><strong>Provider Unique Social ID:</strong> Stored securely to manage the authentication handshakes on subsequent visits.</li>
+                    </ul>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">2. Proximity Coordinates & Privacy Safeguards</h2>
+                    <p>
+                      Soko Nairobi is a localized marketplace matching traders within a 5 kilometer coordinate threshold.
+                      Our platform requests your location coordinates (Latitude and Longitude) based on Nairobi County Wards or your browser's GPS:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1.5 text-zinc-500 dark:text-zinc-400">
+                      <li><strong>Coordinate Protection:</strong> Your exact GPS coordinates are <strong>NEVER</strong> shown to other users. We inject a slight random fuzzing algorithm (offsets of 100 to 150 meters) on all maps to ensure your physical residence is 100% hidden.</li>
+                      <li><strong>Proximity Computation:</strong> We only use the mathematical distance vectors on the server to prioritize sorting nearby listings first on user dashboards.</li>
+                    </ul>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">3. Safe Data Sharing Policy</h2>
+                    <p>
+                      Soko Nairobi is built with zero third-party tracking, profiling, or cookie monetization. 
+                      We do not sell, rent, or lease any merchant information to advertisers. Your data is strictly shared with other users only in the following active trade scenarios:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1.5 text-zinc-500 dark:text-zinc-400">
+                      <li><strong>Active Escrow Transactions:</strong> When a buyer initiates an order and selects M-Pesa STK Push payment, we disclose the seller's verified contact number to complete the mobile transfer.</li>
+                      <li><strong>Chat Messages:</strong> Communication text is stored securely and is only visible to the two active participants of the chat box.</li>
+                    </ul>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">4. Your Control: Instantly Revoking & Deleting Data</h2>
+                    <p>
+                      We believe in absolute data ownership. You have complete control to revoke, request, or delete your entire profile footprint from our servers instantly:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1.5 text-zinc-500 dark:text-zinc-400">
+                      <li><strong>In-App One-Click Wipe:</strong> Navigate to your <strong>Profile Tab</strong> in the dashboard and click "Delete Account". This triggers a cascading SQL purge, deleting your user record, listings, chat history, notifications, and location coordinates within milliseconds.</li>
+                      <li><strong>External Provider Removal:</strong> You can revoke Soko's access anytime via your Google App permissions or Facebook Apps Settings page. Review our Data Deletion Policy for specific instructions.</li>
+                    </ul>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">5. Compliance Queries & Contact</h2>
+                    <p>
+                      For any privacy audits, regulatory concerns, or manual deletion requests, please contact our lead administrator directly:
+                    </p>
+                    <div className="p-4 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl font-mono text-xs text-zinc-500">
+                      Admin Email: <a href="mailto:ioproxxy@gmail.com" className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">ioproxxy@gmail.com</a><br />
+                      Sokos Local Trade Platform Sandbox Portal
+                    </div>
+                  </section>
+                </div>
+              </div>
+            )}
+
+            {compliancePath === 'terms' && (
+              <div className="space-y-6 animate-fade-in">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-extrabold text-emerald-600">
+                    <span>⚖️ Legal Agreements</span>
+                    <span>•</span>
+                    <span>Updated June 28, 2026</span>
+                  </div>
+                  <h1 className="text-3xl font-display font-black text-zinc-950 dark:text-white tracking-tight">Terms of Service</h1>
+                  <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed">
+                    Welcome to Soko Nairobi. By visiting our application, registering a merchant profile, or using Google or Facebook single sign-on, you agree to bound yourself legally to the following terms and guidelines.
+                  </p>
+                </div>
+
+                <div className="border-t border-zinc-200 dark:border-zinc-800 pt-6 space-y-6 text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">1. Platform Services & Eligibility</h2>
+                    <p>
+                      Soko Nairobi is a local marketplace designed to coordinate peer-to-peer commerce and escrow-supported product listings in Nairobi, Kenya. To utilize our interactive trade networks:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1.5 text-zinc-500 dark:text-zinc-400">
+                      <li>You must be at least 18 years old or possess legal guardian consent.</li>
+                      <li>You must establish an active merchant identity linked with your Safaricom M-Pesa mobile number to participate in escrow flows.</li>
+                      <li>You represent that all details provided during onboarding are accurate.</li>
+                    </ul>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">2. Code of Conduct & Prohibited Items</h2>
+                    <p>
+                      Merchants have the right to post classified listings for goods (electronics, furniture, clothing, collectibles, etc.). However, you are strictly prohibited from publishing:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1.5 text-zinc-500 dark:text-zinc-400">
+                      <li>Counterfeit goods, illegal services, chemical substances, or firearms.</li>
+                      <li>Misleading coordinates targeting areas outside of your active Nairobi County sub-counties.</li>
+                      <li>Spam listings, repetitive text, or malicious hyperlinks designed to phish other local users.</li>
+                      <li>Harassment, abusive text, or spam inside our direct peer-to-peer chats.</li>
+                    </ul>
+                    <p className="text-zinc-450 dark:text-zinc-500 text-xs italic">
+                      Note: Soko admins proactively audit listing status. Unapproved or spam-flagged cards will be removed from the Compass Radar instantly.
+                    </p>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">3. Escrow and Payment Simulation Disclaimer</h2>
+                    <p>
+                      Soko Nairobi utilizes Safaricom Lipa Na M-Pesa STK Push API queries for transactions.
+                      All payments triggered are for simulation and direct proof-of-concept testing:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1.5 text-zinc-500 dark:text-zinc-400">
+                      <li>Unless your workspace is configured with production M-Pesa Daraja Credentials, payments are completed inside our safe, sandbox environment.</li>
+                      <li>We do not hold or store direct banking credentials. All payment confirmations are logged on our local secure ledger.</li>
+                    </ul>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">4. Disclaimer of Warranties & Liability Limits</h2>
+                    <p>
+                      Soko Nairobi operates "as is" and "as available". Physical handshakes, exchange locations, and trade resolutions are negotiated strictly between individual buyers and sellers. We assume zero liability for physical safety, product performance, or direct disputes occurring during local face-to-face meetups.
+                    </p>
+                    <div className="p-4 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/30 text-emerald-800 dark:text-emerald-400 rounded-2xl text-xs font-semibold leading-relaxed">
+                      🤝 Safety Guidance: Always conduct trades in highly populated public locations such as Nairobi CBD shopping complexes, banking halls, or security lobbies. Never visit secluded coordinates for trades.
+                    </div>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">5. Contract Deletion and Account Removal</h2>
+                    <p>
+                      You can terminate these Terms at any time by deleting your account. This will completely wipe all your records. Please read our Data Deletion Policy for steps to execute your right to be forgotten.
+                    </p>
+                  </section>
+                </div>
+              </div>
+            )}
+
+            {compliancePath === 'data-deletion' && (
+              <div className="space-y-6 animate-fade-in">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-extrabold text-emerald-600">
+                    <span>🗑️ Data Erasure</span>
+                    <span>•</span>
+                    <span>Updated June 28, 2026</span>
+                  </div>
+                  <h1 className="text-3xl font-display font-black text-zinc-950 dark:text-white tracking-tight">Data Deletion Policy</h1>
+                  <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed">
+                    To comply with Google Play Store policies and Facebook (Meta) Platform Developer Rules (Section 3 - Data Deletion Request Callback), Soko Nairobi provides transparent, swift tools to request the deletion of all personal data, listings, chat logs, and coordinate bindings.
+                  </p>
+                </div>
+
+                <div className="border-t border-zinc-200 dark:border-zinc-800 pt-6 space-y-6 text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">Method 1: Direct One-Click In-App Purge (Recommended)</h2>
+                    <p>
+                      The easiest way to invoke the "Right to be Forgotten" is directly through the Soko Nairobi portal. This triggers an automated, instant cascading deletion inside our PostgreSQL database:
+                    </p>
+                    <div class="bg-zinc-50 dark:bg-zinc-950/45 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-5 space-y-2 text-zinc-550 dark:text-zinc-400">
+                      <p className="font-bold text-zinc-800 dark:text-zinc-200 text-xs">Instructions:</p>
+                      <ol className="list-decimal pl-5 space-y-1">
+                        <li>Log in to your Soko Nairobi account using your credentials, Google Account, or Facebook Login.</li>
+                        <li>Open the bottom navigation menu and click on the <strong>Profile Tab</strong>.</li>
+                        <li>Scroll to the bottom of your Profile card where you will find the red <strong>"Delete Soko Account & Purge Data"</strong> button.</li>
+                        <li>Confirm your selection in the warning modal.</li>
+                      </ol>
+                      <p className="text-rose-600 font-bold text-xs mt-2">
+                        ⚠️ Warning: This action is 100% permanent and irreversible. Your active listings, rating history, chat negotiations, and system notifications will be instantly deleted.
+                      </p>
+                    </div>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">Method 2: Meta (Facebook) Data Deletion Callback URL</h2>
+                    <p>
+                      If you linked Soko Nairobi via Facebook Login and wish to request data deletion via Meta's automated callback engine:
+                    </p>
+                    <ol className="list-decimal pl-5 space-y-2 text-zinc-500 dark:text-zinc-400">
+                      <li>Go to your personal Facebook Account's <strong>Settings & Privacy &gt; Settings</strong>.</li>
+                      <li>In the left sidebar, click <strong>Apps and Websites</strong>.</li>
+                      <li>Search for <strong>"Soko Nairobi"</strong> and click <strong>Remove</strong>.</li>
+                      <li>In the prompt, select the option to send a deletion request. This will dispatch a signed webhook request to our Meta callback endpoint.</li>
+                      <li>Our endpoint immediately logs the deletion command and returns a unique confirmation code. You can verify your status anytime.</li>
+                    </ol>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 className="text-lg font-display font-bold text-zinc-900 dark:text-white">Method 3: Manual Email Data Removal Request</h2>
+                    <p>
+                      If you are unable to access the application dashboard or require administrator assistance:
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1.5 text-zinc-500 dark:text-zinc-400">
+                      <li>Send an email request to our lead developer at <a href="mailto:ioproxxy@gmail.com" className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">ioproxxy@gmail.com</a>.</li>
+                      <li>Subject: <strong>Soko Nairobi Data Deletion Request - [Your Username]</strong></li>
+                      <li>Please provide either your registered email address, username, or your Safaricom mobile phone number to allow verification.</li>
+                      <li>Our administrative team will review, manually execute the delete queries, and reply with a written confirmation of erasure within 24 hours.</li>
+                    </ul>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h2 class="text-lg font-display font-bold text-zinc-900 dark:text-white">4. What Data is Cleared on Deletion?</h2>
+                    <p>
+                      When a deletion is executed (either via in-app wipe, Meta webhook, or email request), the following data is permanently purged:
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                      <div className="p-3 bg-rose-50/50 dark:bg-rose-950/10 border border-rose-100 dark:border-rose-900/20 rounded-2xl">
+                        <span className="text-rose-800 dark:text-rose-400 font-bold block text-xs">❌ Identity Parameters</span>
+                        <span className="text-zinc-500 dark:text-zinc-400 text-[11px] mt-1 block">Full Name, Email Address, Avatar URL, and Password hashes are deleted.</span>
+                      </div>
+                      <div className="p-3 bg-rose-50/50 dark:bg-rose-950/10 border border-rose-100 dark:border-rose-900/20 rounded-2xl">
+                        <span className="text-rose-800 dark:text-rose-400 font-bold block text-xs">❌ Classified Listings</span>
+                        <span className="text-zinc-500 dark:text-zinc-400 text-[11px] mt-1 block">All active, pending, or sold product listings are completely unlinked and deleted.</span>
+                      </div>
+                      <div className="p-3 bg-rose-50/50 dark:bg-rose-950/10 border border-rose-100 dark:border-rose-900/20 rounded-2xl">
+                        <span className="text-rose-800 dark:text-rose-400 font-bold block text-xs">❌ Chat Messages</span>
+                        <span className="text-zinc-500 dark:text-zinc-400 text-[11px] mt-1 block">All sent and received peer-to-peer message histories are erased.</span>
+                      </div>
+                      <div className="p-3 bg-rose-50/50 dark:bg-rose-950/10 border border-rose-100 dark:border-rose-900/20 rounded-2xl">
+                        <span className="text-rose-800 dark:text-rose-400 font-bold block text-xs">❌ Location Coordinates</span>
+                        <span className="text-zinc-500 dark:text-zinc-400 text-[11px] mt-1 block">All ward selections, precise calibration latitude/longitude settings are purged.</span>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            )}
+
+            {compliancePath === 'data-deletion-status' && (
+              <div className="space-y-6 animate-fade-in text-center py-6">
+                <div className="inline-flex p-4 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 rounded-full mb-2">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h3 className="text-lg font-display font-black text-zinc-950 dark:text-white uppercase tracking-tight">Meta Data Deletion Request Status</h3>
+                <p className="text-zinc-500 dark:text-zinc-400 text-xs max-w-md mx-auto leading-relaxed font-semibold">
+                  Your automated Meta platforms request has been resolved. 
+                  All active listing records, proximity coordinates, and vendor ratings have been permanently unlinked and purged from our Nairobi database.
+                </p>
+                <div className="pt-4">
+                  <button 
+                    onClick={() => {
+                      setCompliancePath(null);
+                      if (typeof window !== 'undefined') window.history.pushState({}, '', '/');
+                    }}
+                    className="px-6 py-3 bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-bold text-xs rounded-xl transition duration-150 cursor-pointer uppercase tracking-wider font-mono shadow-md"
+                  >
+                    Back to Sokos Trading Portal 🏠
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <div className="pt-6 border-t border-zinc-150 dark:border-zinc-800 flex justify-between items-center text-[10px] font-semibold text-zinc-400 font-mono">
+              <span>Sokos Compliance Engine • 2026</span>
+              <button 
+                onClick={() => {
+                  setCompliancePath(null);
+                  if (typeof window !== 'undefined') window.history.pushState({}, '', '/');
+                }} 
+                className="text-emerald-600 dark:text-emerald-400 hover:underline font-bold"
+              >
+                Exit Pages & Return to Trading Session →
+              </button>
+            </div>
+          </article>
+        </main>
+
+        {/* Footer */}
+        <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-950 py-8 text-center text-xs text-zinc-500 font-medium">
+          <div className="max-w-4xl mx-auto px-4 space-y-2">
+            <p>© 2026 Soko Nairobi • Safe Proximity classified trade sandbox for Nairobi traders.</p>
+            <p>Questions or Compliance? Email <a href="mailto:ioproxxy@gmail.com" className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">ioproxxy@gmail.com</a></p>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+
   return (
     <div id="sokos_root" className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col pb-0 select-none">
       {/* Header Bar */}
@@ -1320,11 +1690,11 @@ export default function App() {
           {/* Compliance Links Panel */}
           <div className="bg-zinc-50 border border-zinc-200/50 rounded-3xl p-4 text-center space-y-1.5 text-[10px] text-zinc-500 font-medium">
             <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-zinc-450 font-bold">
-              <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition underline decoration-zinc-200 decoration-1">Privacy Policy</a>
+              <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition underline decoration-zinc-200 decoration-1">Privacy Policy</a>
               <span>•</span>
-              <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition underline decoration-zinc-200 decoration-1">Terms of Service</a>
+              <a href="/terms-of-service.html" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition underline decoration-zinc-200 decoration-1">Terms of Service</a>
               <span>•</span>
-              <a href="/data-deletion-policy" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition underline decoration-zinc-200 decoration-1">Data Deletion</a>
+              <a href="/data-deletion-policy.html" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition underline decoration-zinc-200 decoration-1">Data Deletion</a>
             </div>
             <p className="leading-relaxed text-[9.5px]">Soko Nairobi platform satisfies OAuth review directives for Google & Meta API integrations.</p>
           </div>
