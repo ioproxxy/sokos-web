@@ -634,6 +634,30 @@ app.post('/api/users/:id', async (req, res) => {
   }
 });
 
+// --- User Account & Data Deletion (Data Protection Act, 2019) ---
+app.delete('/api/users/:id', async (req, res) => {
+  const userId = req.params.id;
+  const requestUserId = getRequestUserId(req);
+
+  // Only allow users to delete their own account (or admin override)
+  const isAdminRequest = req.headers['x-soko-admin'] === 'true';
+  if (userId !== requestUserId && !isAdminRequest) {
+    return res.status(403).json({ error: 'You can only delete your own account.' });
+  }
+
+  try {
+    const result = await db.deleteUser(userId);
+    if (!result) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+    console.log(`[Data Deletion] User ${userId} account and all associated data deleted by ${requestUserId || 'anonymous'}`);
+    res.json({ success: true, message: 'Account and all associated data have been permanently deleted.' });
+  } catch (e: any) {
+    console.error('[Data Deletion] Error deleting user:', e);
+    res.status(500).json({ error: 'Failed to delete account. Please contact privacy@sokos.co.ke.' });
+  }
+});
+
 // --- User Profile verification ---
 app.post('/api/users/:id/verify', async (req, res) => {
   const { docType } = req.body;

@@ -42,6 +42,9 @@ import OnboardingScreen from './components/OnboardingScreen.tsx';
 import MarketMap from './components/MarketMap.tsx';
 import AdminDashboard from './components/AdminDashboard.tsx';
 import DevConsole from './components/DevConsole.tsx';
+import PrivacyPolicy from './components/PrivacyPolicy.tsx';
+import TermsOfService from './components/TermsOfService.tsx';
+import DataDeletion from './components/DataDeletion.tsx';
 import { NAIROBI_WARDS } from './wards';
 
 // Categories standard
@@ -118,6 +121,9 @@ export default function App() {
   const [processingMpesa, setProcessingMpesa] = useState(false);
   const [isRealPushActive, setIsRealPushActive] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Legal pages state
+  const [legalPage, setLegalPage] = useState<'none' | 'privacy' | 'terms' | 'data-deletion'>('none');
 
   // Geolocation Calibration States
   const [calibratingGps, setCalibratingGps] = useState(false);
@@ -2410,6 +2416,28 @@ export default function App() {
                   >
                     Log Out of Sokos 🔒
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => setLegalPage('data-deletion')}
+                    className="flex-1 py-3 px-4 bg-red-500/10 hover:bg-red-500/20 text-red-600 font-bold text-center rounded-2xl text-xs transition duration-150 cursor-pointer border border-red-500/20 uppercase tracking-wider font-mono"
+                  >
+                    Delete My Data 🗑️
+                  </button>
+                </div>
+
+                {/* Legal Links */}
+                <div className="pt-3 flex items-center justify-center gap-4 text-[10px] text-zinc-400 font-mono">
+                  <button type="button" onClick={() => setLegalPage('privacy')} className="hover:text-emerald-500 transition cursor-pointer underline">
+                    Privacy Policy
+                  </button>
+                  <span>·</span>
+                  <button type="button" onClick={() => setLegalPage('terms')} className="hover:text-emerald-500 transition cursor-pointer underline">
+                    Terms of Service
+                  </button>
+                  <span>·</span>
+                  <button type="button" onClick={() => setLegalPage('data-deletion')} className="hover:text-red-400 transition cursor-pointer underline">
+                    Data Deletion
+                  </button>
                 </div>
               </div>
             </div>
@@ -2469,6 +2497,23 @@ export default function App() {
           )}
 
         </main>
+
+        {/* Global Footer with Legal Links */}
+        <footer className="px-4 py-3 border-t border-zinc-800 bg-zinc-950 flex items-center justify-center gap-4 text-[10px] text-zinc-500 font-mono">
+          <span>&copy; {new Date().getFullYear()} Sokos</span>
+          <span>·</span>
+          <button type="button" onClick={() => setLegalPage('privacy')} className="hover:text-emerald-400 transition cursor-pointer">
+            Privacy Policy
+          </button>
+          <span>·</span>
+          <button type="button" onClick={() => setLegalPage('terms')} className="hover:text-emerald-400 transition cursor-pointer">
+            Terms of Service
+          </button>
+          <span>·</span>
+          <button type="button" onClick={() => setLegalPage('data-deletion')} className="hover:text-red-400 transition cursor-pointer">
+            Data Deletion
+          </button>
+        </footer>
       </div>
 
       {/* Global Listing Detail Modal */}
@@ -2845,6 +2890,26 @@ export default function App() {
           </div>
         </div>
       )}
+      {/* Legal Pages */}
+      {legalPage === 'privacy' && (
+        <PrivacyPolicy onBack={() => setLegalPage('none')} />
+      )}
+      {legalPage === 'terms' && (
+        <TermsOfService onBack={() => setLegalPage('none')} />
+      )}
+      {legalPage === 'data-deletion' && (
+        <DataDeletion
+          onBack={() => setLegalPage('none')}
+          currentUser={currentUser}
+          onAccountDeleted={() => {
+            setCurrentUser(null);
+            setActiveConvId(null);
+            setCurrentTab('explore');
+            setLegalPage('none');
+          }}
+        />
+      )}
+
       {currentUser && (
         <DevConsole
           currentUser={currentUser}
