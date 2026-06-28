@@ -61,7 +61,7 @@ export default function DevConsole({ currentUser, onUserSwitched, orders, onOrde
   };
 
   return (
-    <div id="mvp_auditor_console" className="fixed bottom-4 right-4 z-50 font-sans select-none">
+    <div id="mvp_auditor_console" className="fixed bottom-20 right-4 z-50 font-sans select-none">
       {/* Console Toggle Trigger Button */}
       <button
         type="button"

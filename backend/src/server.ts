@@ -975,6 +975,13 @@ async function startServer() {
       appType: 'spa',
     });
     app.use(vite.middlewares);
+    // SPA fallback for dev mode: serve index.html for all non-API routes
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api/')) return next();
+      vite.transformIndexHtml(req.originalUrl, '').then((html: string) => {
+        res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      }).catch(() => next());
+    });
   } else {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));

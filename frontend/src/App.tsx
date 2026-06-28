@@ -791,7 +791,7 @@ export default function App() {
   };
 
   return (
-    <div id="sokos_root" className="min-h-screen bg-zinc-50 flex flex-col pb-0 select-none">
+    <div id="sokos_root" className="min-h-screen bg-zinc-50 flex flex-col select-none">
       {/* Header Bar */}
       <header id="sokos_header" className="sticky top-0 z-40 bg-zinc-950 text-white border-b border-zinc-850 backdrop-blur-md bg-opacity-95">
         <div className="max-w-7xl mx-auto px-5 py-3.5 flex items-center justify-between">
@@ -2416,18 +2416,23 @@ export default function App() {
       )}
 
       {/* Footer */}
-      <footer className="bg-zinc-950 border-t border-zinc-800 text-zinc-400 px-6 py-6 mt-auto">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[10px] font-mono tracking-wider text-zinc-500">
-            &copy; {new Date().getFullYear()} Sokos Payments Limited &middot; Nairobi, Kenya
-          </p>
-          <div className="flex items-center gap-4 text-[10px] font-mono tracking-wider">
-            <Link to="/privacy" className="hover:text-emerald-400 transition cursor-pointer">Privacy Policy</Link>
-            <span className="text-zinc-700">&middot;</span>
-            <Link to="/terms" className="hover:text-emerald-400 transition cursor-pointer">Terms of Service</Link>
-            <span className="text-zinc-700">&middot;</span>
-            <Link to="/data-deletion" className="hover:text-rose-400 transition cursor-pointer">Data Deletion</Link>
+      <footer className="bg-zinc-950 border-t border-zinc-800 mt-auto">
+        <div className="max-w-7xl mx-auto px-5 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            <div className="bg-emerald-400 text-zinc-950 w-7 h-7 rounded-lg flex items-center justify-center font-black text-sm shadow-[0_2px_8px_rgba(52,211,153,0.2)]">
+              S
+            </div>
+            <p className="text-[10px] font-mono tracking-wider text-zinc-500">
+              &copy; {new Date().getFullYear()} Sokos Payments Limited &middot; Nairobi, Kenya
+            </p>
           </div>
+          <nav className="flex items-center gap-3 text-[10px] font-mono tracking-wider">
+            <Link to="/privacy" className="text-zinc-500 hover:text-emerald-400 transition cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50">Privacy Policy</Link>
+            <span className="text-zinc-800">&middot;</span>
+            <Link to="/terms" className="text-zinc-500 hover:text-emerald-400 transition cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50">Terms of Service</Link>
+            <span className="text-zinc-800">&middot;</span>
+            <Link to="/data-deletion" className="text-zinc-500 hover:text-rose-400 transition cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50">Data Deletion</Link>
+          </nav>
         </div>
       </footer>
 
