@@ -814,29 +814,23 @@ class Database {
     return this.cache.users[idx];
   }
 
-  // --- User Account Deletion (Kenya Data Protection Act, 2019) ---
   public async deleteUser(id: string): Promise<boolean> {
     if (pool) {
-      // PostgreSQL: CASCADE on foreign keys handles related data automatically
-      const res = await pool.query('DELETE FROM users WHERE id = $1 RETURNING id;', [id]);
-      return res.rowCount !== null && res.rowCount > 0;
+      const res = await pool.query('DELETE FROM users WHERE id = $1', [id]);
+      return (res.rowCount ?? 0) > 0;
     }
-
-    // JSON fallback: manually remove user and all associated records
-    const userIdx = this.cache.users.findIndex(u => u.id === id);
-    if (userIdx === -1) return false;
-
-    // Remove all related data
-    this.cache.listings = this.cache.listings.filter(l => l.vendorId !== id);
-    this.cache.messages = this.cache.messages.filter(m => m.senderId !== id || m.receiverId !== id);
-    this.cache.reviews = this.cache.reviews.filter(r => r.targetUserId !== id || r.reviewerId === id);
-    this.cache.orders = this.cache.orders.filter(o => o.buyerId !== id || o.sellerId === id);
-    this.cache.notifications = this.cache.notifications.filter(n => n.userId !== id);
-
-    // Remove the user record itself
-    this.cache.users.splice(userIdx, 1);
-    this.save();
-    return true;
+    const idx = this.cache.users.findIndex(u => u.id === id);
+    if (idx !== -1) {
+      this.cache.users.splice(idx, 1);
+      // Cascade delete records manually for local cache setup
+      this.cache.listings = this.cache.listings.filter(l => l.vendorId !== id);
+      this.cache.messages = this.cache.messages.filter(m => m.senderId !== id && m.receiverId !== id);
+      this.cache.notifications = this.cache.notifications.filter(n => n.userId !== id);
+      this.cache.orders = this.cache.orders.filter(o => o.buyerId !== id && o.sellerId !== id);
+      this.save();
+      return true;
+    }
+    return false;
   }
 
   // --- Listings API ---

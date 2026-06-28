@@ -42,9 +42,6 @@ import OnboardingScreen from './components/OnboardingScreen.tsx';
 import MarketMap from './components/MarketMap.tsx';
 import AdminDashboard from './components/AdminDashboard.tsx';
 import DevConsole from './components/DevConsole.tsx';
-import PrivacyPolicy from './components/PrivacyPolicy.tsx';
-import TermsOfService from './components/TermsOfService.tsx';
-import DataDeletion from './components/DataDeletion.tsx';
 import { NAIROBI_WARDS } from './wards';
 
 // Categories standard
@@ -121,9 +118,11 @@ export default function App() {
   const [processingMpesa, setProcessingMpesa] = useState(false);
   const [isRealPushActive, setIsRealPushActive] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Legal pages state
-  const [legalPage, setLegalPage] = useState<'none' | 'privacy' | 'terms' | 'data-deletion'>('none');
+  
+  // Account Deletion States
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   // Geolocation Calibration States
   const [calibratingGps, setCalibratingGps] = useState(false);
@@ -217,6 +216,29 @@ export default function App() {
       } catch (e) {
         console.error(e);
       }
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    setIsDeletingAccount(true);
+    setDeleteError(null);
+    try {
+      const res = await apiFetch('/api/auth/delete-account', { method: 'POST' });
+      if (res.ok) {
+        setCurrentUser(null);
+        setActiveConvId(null);
+        setCurrentTab('explore');
+        setShowDeleteConfirm(false);
+        alert('Your Sokos account and all associated location listings, chats, and ratings have been permanently purged.');
+      } else {
+        const errData = await res.json();
+        setDeleteError(errData.error || 'Failed to complete data deletion request.');
+      }
+    } catch (e: any) {
+      console.error(e);
+      setDeleteError(e.message || 'Server error. Try again.');
+    } finally {
+      setIsDeletingAccount(false);
     }
   };
 
@@ -1294,6 +1316,18 @@ export default function App() {
               </button>
             </div>
           )}
+
+          {/* Compliance Links Panel */}
+          <div className="bg-zinc-50 border border-zinc-200/50 rounded-3xl p-4 text-center space-y-1.5 text-[10px] text-zinc-500 font-medium">
+            <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-zinc-450 font-bold">
+              <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition underline decoration-zinc-200 decoration-1">Privacy Policy</a>
+              <span>•</span>
+              <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition underline decoration-zinc-200 decoration-1">Terms of Service</a>
+              <span>•</span>
+              <a href="/data-deletion-policy" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition underline decoration-zinc-200 decoration-1">Data Deletion</a>
+            </div>
+            <p className="leading-relaxed text-[9.5px]">Soko Nairobi platform satisfies OAuth review directives for Google & Meta API integrations.</p>
+          </div>
         </aside>
 
         {/* Dynamic Content Columns */}
@@ -2407,37 +2441,65 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="pt-4 flex flex-col sm:flex-row gap-3">
-                  <button
-                    id="btn_logout_sokos"
-                    type="button"
-                    onClick={handleLogout}
-                    className="flex-1 py-3 px-4 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 font-bold text-center rounded-2xl text-xs transition duration-150 cursor-pointer border border-rose-500/20 uppercase tracking-wider font-mono"
-                  >
-                    Log Out of Sokos 🔒
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setLegalPage('data-deletion')}
-                    className="flex-1 py-3 px-4 bg-red-500/10 hover:bg-red-500/20 text-red-600 font-bold text-center rounded-2xl text-xs transition duration-150 cursor-pointer border border-red-500/20 uppercase tracking-wider font-mono"
-                  >
-                    Delete My Data 🗑️
-                  </button>
-                </div>
+                <div className="pt-4 flex flex-col gap-3.5 border-t border-zinc-100 mt-4 font-sans">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button
+                      id="btn_logout_sokos"
+                      type="button"
+                      onClick={handleLogout}
+                      className="flex-1 py-3 px-4 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-bold text-center rounded-2xl text-xs transition duration-150 cursor-pointer border border-zinc-200 uppercase tracking-wider font-mono"
+                    >
+                      Log Out of Sokos 🔒
+                    </button>
 
-                {/* Legal Links */}
-                <div className="pt-3 flex items-center justify-center gap-4 text-[10px] text-zinc-400 font-mono">
-                  <button type="button" onClick={() => setLegalPage('privacy')} className="hover:text-emerald-500 transition cursor-pointer underline">
-                    Privacy Policy
-                  </button>
-                  <span>·</span>
-                  <button type="button" onClick={() => setLegalPage('terms')} className="hover:text-emerald-500 transition cursor-pointer underline">
-                    Terms of Service
-                  </button>
-                  <span>·</span>
-                  <button type="button" onClick={() => setLegalPage('data-deletion')} className="hover:text-red-400 transition cursor-pointer underline">
-                    Data Deletion
-                  </button>
+                    <button
+                      id="btn_trigger_delete_account"
+                      type="button"
+                      onClick={() => {
+                        setShowDeleteConfirm(true);
+                        setDeleteError(null);
+                      }}
+                      className="flex-1 py-3 px-4 bg-rose-50 hover:bg-rose-100 text-rose-650 font-bold text-center rounded-2xl text-xs transition duration-150 cursor-pointer border border-rose-200 uppercase tracking-wider font-mono"
+                    >
+                      Delete Account & Data 🗑️
+                    </button>
+                  </div>
+
+                  {showDeleteConfirm && (
+                    <div className="bg-rose-50/50 border border-rose-200 rounded-3xl p-5 space-y-4 animate-fade-in text-left">
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-black text-rose-900 uppercase font-mono tracking-wide">⚠️ Permanently delete your account?</h4>
+                        <p className="text-[11.5px] text-rose-700 leading-relaxed font-semibold">
+                          This will instantly purge your merchant profile, location coordinates, rating votes, message records, and all active classified listings from our system. This is irreversible.
+                        </p>
+                      </div>
+
+                      {deleteError && (
+                        <div className="p-2.5 bg-rose-100 border border-rose-200 text-rose-800 rounded-xl text-[10px] font-mono leading-relaxed">
+                          Error: {deleteError}
+                        </div>
+                      )}
+
+                      <div className="flex gap-2.5">
+                        <button
+                          type="button"
+                          disabled={isDeletingAccount}
+                          onClick={() => setShowDeleteConfirm(false)}
+                          className="flex-1 py-2 bg-white hover:bg-zinc-100 border border-zinc-200 rounded-xl text-[10px] font-bold text-zinc-700 uppercase tracking-wider transition-all cursor-pointer"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          disabled={isDeletingAccount}
+                          onClick={handleDeleteAccount}
+                          className="flex-1 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-[10px] font-extrabold uppercase tracking-wider transition-all cursor-pointer shadow-md shadow-rose-600/10"
+                        >
+                          {isDeletingAccount ? 'Processing erasure...' : 'Yes, Purge Everything'}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -2497,23 +2559,6 @@ export default function App() {
           )}
 
         </main>
-
-        {/* Global Footer with Legal Links */}
-        <footer className="px-4 py-3 border-t border-zinc-800 bg-zinc-950 flex items-center justify-center gap-4 text-[10px] text-zinc-500 font-mono">
-          <span>&copy; {new Date().getFullYear()} Sokos</span>
-          <span>·</span>
-          <button type="button" onClick={() => setLegalPage('privacy')} className="hover:text-emerald-400 transition cursor-pointer">
-            Privacy Policy
-          </button>
-          <span>·</span>
-          <button type="button" onClick={() => setLegalPage('terms')} className="hover:text-emerald-400 transition cursor-pointer">
-            Terms of Service
-          </button>
-          <span>·</span>
-          <button type="button" onClick={() => setLegalPage('data-deletion')} className="hover:text-red-400 transition cursor-pointer">
-            Data Deletion
-          </button>
-        </footer>
       </div>
 
       {/* Global Listing Detail Modal */}
@@ -2890,26 +2935,6 @@ export default function App() {
           </div>
         </div>
       )}
-      {/* Legal Pages */}
-      {legalPage === 'privacy' && (
-        <PrivacyPolicy onBack={() => setLegalPage('none')} />
-      )}
-      {legalPage === 'terms' && (
-        <TermsOfService onBack={() => setLegalPage('none')} />
-      )}
-      {legalPage === 'data-deletion' && (
-        <DataDeletion
-          onBack={() => setLegalPage('none')}
-          currentUser={currentUser}
-          onAccountDeleted={() => {
-            setCurrentUser(null);
-            setActiveConvId(null);
-            setCurrentTab('explore');
-            setLegalPage('none');
-          }}
-        />
-      )}
-
       {currentUser && (
         <DevConsole
           currentUser={currentUser}
