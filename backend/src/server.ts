@@ -4,6 +4,7 @@
  */
 
 import express from 'express';
+import cors from 'cors';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
@@ -11,14 +12,31 @@ import dotenv from 'dotenv';
 import { db, getDistance } from './db.js'; // Use ESM extension if Node requires, or just import from ts/js
 import { triggerStkPush } from './mpesa.js';
 import { User, Listing, Message, Order, Notification, Review } from './types.js';
+import googleAuthRouter from './auth/google.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = 3000;
 
-// Middleware
+// Configure CORS to allow requests from production domain
+const corsOptions = {
+    origin: [
+        'http://localhost:5173',  // Local development (Vite default)
+        'http://localhost:3000',  // Local development (alternative)
+        'https://www.sokos.co.ke', // Production domain
+        'https://sokos.co.ke',    // Production domain (without www)
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
+
+// Google OAuth routes
+app.use('/api/auth/google', googleAuthRouter);
 
 // Initialize Gemini Client
 const ai = process.env.GEMINI_API_KEY
@@ -861,6 +879,40 @@ app.post('/api/notifications/read-all', async (req, res) => {
 app.post('/api/notifications/:id/read', async (req, res) => {
   await db.markNotificationRead(req.params.id);
   res.json({ message: 'Notification marked read.' });
+});
+
+// --- Data Deletion (Kenya Data Protection Act, 2019) ---
+app.post('/api/data-deletion', async (req, res) => {
+  const reqUserId = getRequestUserId(req);
+  const { email, reason } = req.body;
+
+  if (!reqUserId) {
+    return res.status(401).json({ error: 'You must be logged in to request data deletion.' });
+  }
+
+  try {
+    const user = await db.getUserById(reqUserId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    // Verify email matches (if provided)
+    if (email && user.email && user.email.toLowerCase() !== email.toLowerCase()) {
+      return res.status(403).json({ error: 'Email does not match the logged-in account.' });
+    }
+
+    // Delete user and all associated data
+    await db.deleteUser(reqUserId);
+
+    // Clear session cookie
+    res.setHeader('Set-Cookie', 'soko_user_id=; Path=/; HttpOnly; SameSite=None; Secure; Max-Age=0');
+
+    console.log(`[Data Deletion] User ${reqUserId} (${user.name}) requested data deletion. Reason: ${reason || 'Not provided'}`);
+    res.json({ success: true, message: 'All personal data has been permanently deleted.' });
+  } catch (err: any) {
+    console.error('[Data Deletion] Error:', err);
+    res.status(500).json({ error: 'Failed to process deletion request. Please contact support.' });
+  }
 });
 
 // --- Gemini AI Trade Smart Insights ---

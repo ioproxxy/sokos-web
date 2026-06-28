@@ -1202,6 +1202,27 @@ class Database {
     });
     this.save();
   }
+
+  public async deleteUser(userId: string): Promise<void> {
+    if (pool) {
+      // Delete in order respecting foreign keys
+      await pool.query('DELETE FROM notifications WHERE user_id = $1;', [userId]);
+      await pool.query('DELETE FROM reviews WHERE target_user_id = $1 OR reviewer_id = $1;', [userId]);
+      await pool.query('DELETE FROM orders WHERE buyer_id = $1 OR seller_id = $1;', [userId]);
+      await pool.query('DELETE FROM messages WHERE sender_id = $1 OR receiver_id = $1;', [userId]);
+      await pool.query('DELETE FROM listings WHERE vendor_id = $1;', [userId]);
+      await pool.query('DELETE FROM users WHERE id = $1;', [userId]);
+      return;
+    }
+    // JSON db: remove user and all associated data
+    this.cache.notifications = this.cache.notifications.filter(n => n.userId !== userId);
+    this.cache.reviews = this.cache.reviews.filter(r => r.targetUserId !== userId && r.reviewerId !== userId);
+    this.cache.orders = this.cache.orders.filter(o => o.buyerId !== userId && o.sellerId !== userId);
+    this.cache.messages = this.cache.messages.filter(m => m.senderId !== userId && m.receiverId !== userId);
+    this.cache.listings = this.cache.listings.filter(l => l.vendorId !== userId);
+    this.cache.users = this.cache.users.filter(u => u.id !== userId);
+    this.save();
+  }
 }
 
 export const db = new Database();
