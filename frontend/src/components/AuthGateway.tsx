@@ -78,13 +78,13 @@ export default function AuthGateway({ onAuthSuccess }: Props) {
     script.defer = true;
     script.onload = () => {
       if (window.google && window.google.accounts && googleBtnRef.current) {
+        const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || (window as any).__GOOGLE_CLIENT_ID__;
         window.google.accounts.id.initialize({
-          // Client ID placeholder - users must set GOOGLE_CLIENT_ID in env
-          client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+          client_id: clientId || 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
           callback: handleGoogleCredentialResponse,
         });
         // Only render if we have a real client ID
-        if (process.env.GOOGLE_CLIENT_ID || (window as any).__GOOGLE_CLIENT_ID__) {
+        if (clientId && clientId !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
           window.google.accounts.id.renderButton(googleBtnRef.current!, {
             theme: 'filled_black',
             size: 'large',

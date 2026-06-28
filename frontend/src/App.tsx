@@ -244,7 +244,7 @@ export default function App() {
 
   // Live polling for M-Pesa push validation status
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: any;
     if (mpesaOrder && isRealPushActive) {
       interval = setInterval(async () => {
         try {
