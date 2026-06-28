@@ -17,6 +17,9 @@ dotenv.config();
 const app = express();
 const PORT = 3000;
 
+// Configure Express to trust reverse proxy headers (e.g. X-Forwarded-Proto)
+app.set('trust proxy', true);
+
 // Middleware
 app.use(express.json());
 
@@ -255,9 +258,19 @@ app.post('/api/auth/logout', (req, res) => {
   res.json({ success: true, message: 'Logged out successfully' });
 });
 
+// Helper to determine secure protocol robustly across localhost and cloud platforms
+function getProtocol(req: express.Request): string {
+  const host = req.headers['x-forwarded-host'] || req.headers.host || req.get('host') || 'localhost:3000';
+  // If the request goes to an external domain (e.g. sokos.co.ke, or a cloud run domain), force HTTPS
+  if (host && typeof host === 'string' && !host.includes('localhost') && !host.includes('127.0.0.1') && !host.includes('0.0.0.0')) {
+    return 'https';
+  }
+  return req.secure || req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http';
+}
+
 // Helper to construct self-referential OAuth redirect URI relative to the request context
 function getRedirectUri(req: express.Request): string {
-  const protocol = req.secure || req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http';
+  const protocol = getProtocol(req);
   const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost:3000';
   return `${protocol}://${host}/auth/callback`;
 }
@@ -269,7 +282,7 @@ app.get('/api/auth/google/url', (req, res) => {
   
   if (!gClientId || gClientId === 'YOUR_GOOGLE_CLIENT_ID' || gClientId === '') {
     // Falls back to beautiful custom simulated login screen for direct preview/development testing
-    const protocol = req.secure || req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http';
+    const protocol = getProtocol(req);
     const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost:3000';
     return res.json({ url: `${protocol}://${host}/api/auth/google/simulate-consent` });
   }
@@ -293,7 +306,7 @@ app.get('/api/auth/facebook/url', (req, res) => {
   
   if (!fbClientId || fbClientId === 'YOUR_FACEBOOK_CLIENT_ID' || fbClientId === '') {
     // Falls back to beautiful custom simulated login screen for direct preview/development testing
-    const protocol = req.secure || req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http';
+    const protocol = getProtocol(req);
     const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost:3000';
     return res.json({ url: `${protocol}://${host}/api/auth/facebook/simulate-consent` });
   }
@@ -757,7 +770,7 @@ app.get('/api/telegram/products', async (req, res) => {
     const slicedListings = listings.slice(0, maxResults);
 
     const host = req.get('host') || 'sokos.co.ke';
-    const protocol = req.secure || req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http';
+    const protocol = getProtocol(req);
 
     const products = slicedListings.map(l => {
       const imageUrl = l.images && l.images.length > 0 ? l.images[0] : '';
@@ -2076,7 +2089,7 @@ app.get('/data-deletion-status', (req, res) => {
 // 5. Meta (Facebook) Data Deletion Request Webhook Endpoint
 app.post('/api/auth/facebook-data-deletion', (req, res) => {
   // Return the strict JSON contract required by Meta Platform guidelines
-  const protocol = req.secure || req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http';
+  const protocol = getProtocol(req);
   const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost:3000';
   const trackingId = 'del_fb_' + Math.random().toString(36).substring(2, 10);
   
