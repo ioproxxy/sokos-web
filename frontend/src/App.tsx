@@ -36,9 +36,7 @@ import DevConsole from './components/DevConsole.tsx';
 import AuthGateway from './components/AuthGateway.tsx';
 import OnboardingScreen from './components/OnboardingScreen.tsx';
 import MarketMap from './components/MarketMap.tsx';
-import PrivacyPolicy from './components/PrivacyPolicy.tsx';
-import TermsOfService from './components/TermsOfService.tsx';
-import DataDeletion from './components/DataDeletion.tsx';
+import { Link } from 'react-router-dom';
 
 // Categories standard
 const CATEGORIES = ['All', 'Electronics', 'Furniture', 'Clothing & Fashion', 'Food & Groceries', 'Sports & Outdoors', 'Vehicles', 'Local Services'];
@@ -197,11 +195,6 @@ export default function App() {
   const [ratingValue, setRatingValue] = useState(5);
   const [reviewText, setReviewText] = useState('');
   const [ratingOrderId, setRatingOrderId] = useState<string | null>(null);
-
-  // Legal pages state
-  const [showPrivacy, setShowPrivacy] = useState(false);
-  const [showTerms, setShowTerms] = useState(false);
-  const [showDataDeletion, setShowDataDeletion] = useState(false);
 
   // Verifying State
   const [verifyingDoc, setVerifyingDoc] = useState<'national_id' | 'passport' | 'business_permit' | null>('national_id');
@@ -2429,19 +2422,14 @@ export default function App() {
             &copy; {new Date().getFullYear()} Sokos Payments Limited &middot; Nairobi, Kenya
           </p>
           <div className="flex items-center gap-4 text-[10px] font-mono tracking-wider">
-            <button onClick={() => setShowPrivacy(true)} className="hover:text-emerald-400 transition cursor-pointer">Privacy Policy</button>
+            <Link to="/privacy" className="hover:text-emerald-400 transition cursor-pointer">Privacy Policy</Link>
             <span className="text-zinc-700">&middot;</span>
-            <button onClick={() => setShowTerms(true)} className="hover:text-emerald-400 transition cursor-pointer">Terms of Service</button>
+            <Link to="/terms" className="hover:text-emerald-400 transition cursor-pointer">Terms of Service</Link>
             <span className="text-zinc-700">&middot;</span>
-            <button onClick={() => setShowDataDeletion(true)} className="hover:text-rose-400 transition cursor-pointer">Data Deletion</button>
+            <Link to="/data-deletion" className="hover:text-rose-400 transition cursor-pointer">Data Deletion</Link>
           </div>
         </div>
       </footer>
-
-      {/* Legal page modals */}
-      {showPrivacy && <PrivacyPolicy onClose={() => setShowPrivacy(false)} />}
-      {showTerms && <TermsOfService onClose={() => setShowTerms(false)} />}
-      {showDataDeletion && <DataDeletion onClose={() => setShowDataDeletion(false)} />}
 
     </div>
   );
