@@ -1044,7 +1044,7 @@ export default function App() {
       )}
 
       {/* Main Core View Area with Sidebar on Desktop, bottom navigaton on mobile */}
-      <div className="max-w-7xl mx-auto px-5 py-6 flex-1 w-full grid grid-cols-1 md:grid-cols-12 gap-5 mb-6">
+      <div className="max-w-7xl mx-auto px-5 py-6 flex-1 w-full grid grid-cols-1 md:grid-cols-12 gap-5">
         
         {/* Deskop Left Sidebar */}
         <aside id="desktop_tabs_sidebar" className="hidden md:flex flex-col gap-4 md:col-span-3">
@@ -2416,7 +2416,7 @@ export default function App() {
       )}
 
       {/* Footer */}
-      <footer className="bg-zinc-950 border-t border-zinc-800 mt-auto">
+      <footer className="bg-zinc-950 border-t border-zinc-800 shrink-0">
         <div className="max-w-7xl mx-auto px-5 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
             <div className="bg-emerald-400 text-zinc-950 w-7 h-7 rounded-lg flex items-center justify-center font-black text-sm shadow-[0_2px_8px_rgba(52,211,153,0.2)]">
